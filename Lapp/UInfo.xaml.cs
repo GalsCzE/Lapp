@@ -18,6 +18,7 @@ using Lapp.JsonParsee;
 using Lapp.Framy;
 using RestSharp;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace Lapp
 {
@@ -46,10 +47,19 @@ namespace Lapp
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("cache-control", "no-cache");
                 IRestResponse response = client.Execute(request);
-                IParse parser = new JsonParser();
-                string result = response.Content.Replace(@"[", "");
-                result = result.Replace(@"]", "");
-                u = JsonConvert.DeserializeObject<User>(result);
+                HttpStatusCode stat = response.StatusCode;
+                if (stat == HttpStatusCode.OK)
+                {
+                    IParse parser = new JsonParser();
+                    string result = response.Content.Replace(@"[", "");
+                    result = result.Replace(@"]", "");
+                    u = JsonConvert.DeserializeObject<User>(result);
+                }
+                else
+                {
+                    MessageBox.Show("Špatná stránka!");
+                    MessageBox.Show("Nebude to fungovat");
+                }
             }
             catch
             {
