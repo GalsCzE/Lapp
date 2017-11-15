@@ -70,12 +70,27 @@ namespace Lapp
 
         private void back_btn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (edit)
+            {
+                BackEnd.frame.Navigate(new UInfo(u.ID));
+            }
+            else
+            {
+                BackEnd.frame.Navigate(new UList());
+            }
         }
 
         private void created_Click(object sender, RoutedEventArgs e)
         {
             Create();
+            if (edit)
+            {
+                BackEnd.frame.Navigate(new UInfo(u.ID));
+            }
+            else
+            {
+                BackEnd.frame.Navigate(new UList());
+            }
         }
 
         private void name_TextChanged(object sender, TextChangedEventArgs e)

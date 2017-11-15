@@ -49,12 +49,13 @@ namespace Lapp
 
         private void Add_btn_Click(object sender, RoutedEventArgs e)
         {
-
+            BackEnd.frame.Navigate(new NUser());
         }
 
         private void People_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            int id = ((User)People_list.SelectedItem).ID;
+            BackEnd.frame.Navigate(new UInfo(id));
         }
     }
 }
