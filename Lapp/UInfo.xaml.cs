@@ -12,20 +12,38 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Lapp.Entity;
+using Lapp.Interface;
+using Lapp.JsonParsee;
 using Lapp.Framy;
+using RestSharp;
+using Newtonsoft.Json;
 
 namespace Lapp
 {
     /// <summary>
-    /// Interakční logika pro MainWindow.xaml
+    /// Interakční logika pro UInfo.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UInfo : Page
     {
-        public MainWindow()
+        public UInfo()
         {
             InitializeComponent();
-            BackEnd.frame = frame;
-            BackEnd.frame.Navigate(new UList());
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
