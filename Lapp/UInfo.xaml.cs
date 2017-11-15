@@ -39,15 +39,22 @@ namespace Lapp
 
         private void GetUser()
         {
-            var client = new RestClient("https://student.sps-prosek.cz/~sevcima14/4ITB/lapp/dotaz.php?ID=" + ID);
-            //var client = new RestClient("https://requestb.in/19vwv091");
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("cache-control", "no-cache");
-            IRestResponse response = client.Execute(request);
-            IParse parser = new JsonParser();
-            string result = response.Content.Replace(@"[", "");
-            result = result.Replace(@"]", "");
-            u = JsonConvert.DeserializeObject<User>(result);
+            try
+            {
+                var client = new RestClient("https://student.sps-prosek.cz/~sevcima14/4ITB/lapp/dotaz.php?ID=" + ID);
+                //var client = new RestClient("https://requestb.in/19vwv091");
+                var request = new RestRequest(Method.GET);
+                request.AddHeader("cache-control", "no-cache");
+                IRestResponse response = client.Execute(request);
+                IParse parser = new JsonParser();
+                string result = response.Content.Replace(@"[", "");
+                result = result.Replace(@"]", "");
+                u = JsonConvert.DeserializeObject<User>(result);
+            }
+            catch
+            {
+                MessageBox.Show("Vyskytla se chyba");
+            }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -62,13 +69,20 @@ namespace Lapp
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Smazat " + u.name + " ?", "Deleting item", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
+            try
             {
-                var client = new RestClient("https://student.sps-prosek.cz/~sevcima14/4ITB/lapp/Delete.php?ID=" + ID);
-                var request = new RestRequest(Method.GET);
-                IRestResponse response = client.Execute(request);
-                BackEnd.frame.Navigate(new UList());
+                var result = MessageBox.Show("Smazat " + u.name + " ?", "Deleting item", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var client = new RestClient("https://student.sps-prosek.cz/~sevcima14/4ITB/lapp/Delete.php?ID=" + ID);
+                    var request = new RestRequest(Method.GET);
+                    IRestResponse response = client.Execute(request);
+                    BackEnd.frame.Navigate(new UList());
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Vyskytla se chyba");
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Lapp.JsonParsee
     {
         public async Task<T> ParseString<T>(string response)
         {
-            return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(response));
+                return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(response));
         }
     }
 }

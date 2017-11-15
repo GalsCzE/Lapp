@@ -32,19 +32,27 @@ namespace Lapp
             {
                 RUN();
             }
-            catch
+            catch(Exception e)
             {
-                Debug.WriteLine("Neplatná hodnota v databázi");
+                MessageBox.Show("Vyskytla se chyba");
+
             }
         }
 
         private async Task RUN()
         {
-            var client = new RestClient("https://student.sps-prosek.cz/~sevcima14/4ITB/lapp/dotaz.php");
-            var request = new RestRequest(Method.GET);
-            IRestResponse response = client.Execute(request);
-            IParse parser = new JsonParser();
-            People_list.ItemsSource = await parser.ParseString<List<User>>(response.Content);
+            try
+            {
+                var client = new RestClient("https://student.sps-prosek.cz/~sevcima14/4ITB/lap/dotaz.php");
+                var request = new RestRequest(Method.GET);
+                IRestResponse response = client.Execute(request);
+                IParse parser = new JsonParser();
+                People_list.ItemsSource = await parser.ParseString<List<User>>(response.Content);
+            }
+            catch
+            {
+                MessageBox.Show("Vyskytla se chyba");
+            }
         }
 
         private void Add_btn_Click(object sender, RoutedEventArgs e)
